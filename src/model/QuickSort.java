@@ -1,19 +1,20 @@
 package model;
 
 public class QuickSort {
-// Partition function
+    // Función de partición: divide el array en dos partes, 
+    // elementos menores y mayores que el pivote
     static int partition(int[] arr, int low, int high) {
         
-        // Choose the pivot
+        // Selecciona el último elemento como pivote
         int pivot = arr[high];
         
-        // Index of smaller element and indicates 
-        // the right position of pivot found so far
+        // i es el índice del elemento más pequeño y marca
+        // la posición correcta del pivote encontrada hasta ahora
         int i = low - 1;
 
-        // Traverse arr[low..high] and move all smaller
-        // elements to the left side. Elements from low to 
-        // i are smaller after every iteration
+        // Recorre el array desde low hasta high-1
+        // y mueve todos los elementos menores que el pivote
+        // hacia la izquierda del array
         for (int j = low; j <= high - 1; j++) {
             if (arr[j] < pivot) {
                 i++;
@@ -21,28 +22,29 @@ public class QuickSort {
             }
         }
         
-        // Move pivot after smaller elements and
-        // return its position
+        // Mueve el pivote después de los elementos más pequeños
+        // y devuelve su posición final
         swap(arr, i + 1, high);  
         return i + 1;
     }
 
-    // Swap function
+    // Función auxiliar para intercambiar dos elementos en el array
     static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
-    // The QuickSort function implementation
+    // Implementación principal del algoritmo QuickSort
     public void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             
-            // pi is the partition return index of pivot
+            // pi es el índice de partición donde queda el pivote
             int pi = partition(arr, low, high);
 
-            // Recursion calls for smaller elements
-            // and greater or equals elements
+            // Llamadas recursivas para ordenar:
+            // 1. Los elementos menores que el pivote (subarray izquierdo)
+            // 2. Los elementos mayores que el pivote (subarray derecho)
             quickSort(arr, low, pi - 1);
             quickSort(arr, pi + 1, high);
         }
